@@ -1,18 +1,21 @@
+import { ManageOrdersComponent } from './admin/components/manage-orders/manage-orders.component';
+import { ManageUsersComponent } from './admin/components/manage-users/manage-users.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './products/products.component';
-import { SingleProductComponent } from './single-product/single-product.component';
-import { ShoppingCartComponent } from './myprofile/shopping-cart/shopping-cart.component';
-import { MyprofileComponent } from './myprofile/myprofile.component';
-import { ProfileInformationComponent } from './myprofile/profile-information/profile-information.component';
-import { ManageAddressComponent } from './myprofile/manage-address/manage-address.component';
-import { ReviewsRatingComponent } from './myprofile/reviews-rating/reviews-rating.component';
-import { SavedCardsComponent } from './myprofile/saved-cards/saved-cards.component';
-import { WishlistComponent } from './myprofile/wishlist/wishlist.component';
-import { MyRewardsComponent } from './myprofile/my-rewards/my-rewards.component';
-import { NotificationsComponent } from './myprofile/notifications/notifications.component';
-import {AuthService } from './services/auth-service';
+import { HomeComponent } from './shop/home/home.component';
+import { ProductsComponent } from './shop/products/products.component';
+import { SingleProductComponent } from './shop/single-product/single-product.component';
+import { ShoppingCartComponent } from './shop/myprofile/shopping-cart/shopping-cart.component';
+import { MyprofileComponent } from './shop/myprofile/myprofile.component';
+import { ProfileInformationComponent } from './shop/myprofile/profile-information/profile-information.component';
+import { ManageAddressComponent } from './shop/myprofile/manage-address/manage-address.component';
+import { ReviewsRatingComponent } from './shop/myprofile/reviews-rating/reviews-rating.component';
+import { SavedCardsComponent } from './shop/myprofile/saved-cards/saved-cards.component';
+import { WishlistComponent } from './shop/myprofile/wishlist/wishlist.component';
+import { MyRewardsComponent } from './shop/myprofile/my-rewards/my-rewards.component';
+import { NotificationsComponent } from './shop/myprofile/notifications/notifications.component';
+import {AuthService } from './shop/services/auth-service';
+import { ManageProductsComponent } from './admin/components/manage-products/manage-products.component';
 
 const routes: Routes = [
   {
@@ -73,7 +76,21 @@ const routes: Routes = [
 
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '*', redirectTo: 'home', pathMatch: 'full' }
+  { path: '*', redirectTo: 'home', pathMatch: 'full' },
+
+  //admin
+  {
+    path: 'admin/user',
+    component: ManageUsersComponent
+  },
+  {
+    path: 'admin/order',
+    component: ManageOrdersComponent
+  },
+  {
+    path: 'admin/product',
+    component: ManageProductsComponent
+  },
 ];
 
 @NgModule({
