@@ -4,9 +4,9 @@
         Người dùng của hệ thống
       </h2>
     </div>
-    <button class="btn btn-success" (click)="add('add')">Thêm mới</button>
+    <button mat-raised-button color="primary" (click)="add('add')">Thêm mới</button>
     <table *ngIf="users" class="table table-striped ">
-      <thead>
+      <thead class="thead-dark">
       <tr>
         <th scope="col">STT</th>
         <th scope="col">ID</th>
@@ -54,7 +54,7 @@
                 <button class="btn btn-info" (click)="edit(u, 'edit')">
                     Sửa
                 </button>
-                <button class="btn btn-danger" (click) = "delete(u, 'delete')">
+                <button mat-raised-button color="warn" (click) = "delete(u, 'delete')">
                     Xóa
                 </button>
             </td>

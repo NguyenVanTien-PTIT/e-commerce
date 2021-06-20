@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
   sidenavEnable = false;
   isLogin: boolean;
   private userCurrent: any;
+  admin:any;
+  isAdmin: boolean;
 
   @Output()
   sidenav = new EventEmitter();
@@ -41,6 +43,18 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userCurrent = this.loginService.getUserCurrent();
     console.log('user current',this.userCurrent)
+    this.checkAdmin();
+    console.log(this.isAdmin);
+  }
+
+  checkAdmin() {
+    if(this.userCurrent){
+      this.userCurrent.roles.forEach(role =>{
+        if(role === 'ADMIN'){
+          this.isAdmin = true;
+        }
+      })
+    }
   }
 
   showCart() {
@@ -63,6 +77,7 @@ export class HeaderComponent implements OnInit {
 
   //Đăng xuất
   logout() {
+    this.isAdmin = false;
     this.userCurrent = null;
     this.toastr.info('Đã đăng xuất')
     localStorage.removeItem('token');

@@ -14,6 +14,12 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "SELECT p.* FROM product p WHERE p.id_category=?1", nativeQuery = true)
     List<Product> findProductByCategory(Integer idCategory);
 
+    @Query(value = "SELECT COUNT(p.id) FROM product p WHERE p.id_category=?1", nativeQuery = true)
+    Long countProductByCategory(Integer idCategory);
+
+    @Query(value = "SELECT p.* FROM product p WHERE p.id_category=?1", nativeQuery = true)
+    List<Product> findByCategory(Integer idCategory, Pageable pageable);
+
     @Query(value = "SELECT p.* FROM product as p WHERE p.price <= ?1 ", nativeQuery = true)
     List<Product> findByPrice(Double price, Pageable pageable);
 
@@ -23,7 +29,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "SELECT p.* FROM product as p WHERE id != ?1 ORDER BY RAND() LIMIT 4", nativeQuery = true)
     List<Product> findProductRelateById(Integer id);
 
-    @Query(value = "SELECT p.* FROM product as p ORDER BY createDate DESC LIMIT ?1", nativeQuery = true)
+    @Query(value = "SELECT p.* FROM product as p ORDER BY create_date DESC LIMIT ?1", nativeQuery = true)
     List<Product> findNewProduct(Integer limit);
 
     @Query(value = "SELECT p.* FROM product as p " +

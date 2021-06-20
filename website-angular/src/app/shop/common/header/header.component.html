@@ -51,6 +51,15 @@
                 <li class="contain" *ngIf="userCurrent" (click)="showCart()">
                     <mat-icon>add_shopping_cart</mat-icon>
                 </li>
+                <li class="contain" [routerLink]="['/admin/order']" routerLinkActive="active" *ngIf="isAdmin">
+                    <span>MANAGE-ORDER</span>
+                </li>
+                <li class="contain" [routerLink]="['/admin/user']" routerLinkActive="active" *ngIf="isAdmin">
+                    <span>MANAGE-USER</span>
+                </li>
+                <li class="contain" [routerLink]="['/admin/product']" routerLinkActive="active" *ngIf="isAdmin">
+                    <span>MANAGE-PRODUCT</span>
+                </li>
             </ul>
         </div>
         <div class="cart-icon mobile-view" *ngIf="!userCurrent">

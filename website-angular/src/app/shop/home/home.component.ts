@@ -27,8 +27,8 @@ export class HomeComponent implements OnInit {
   }
 
   private idUser;
-  private listNewProduct:any = [];
-  private listBestSeller:any = [];
+  private listNewProduct:any[] = [];
+  private listBestSeller:any[] = [];
 
   constructor(
     iconRegistry: MatIconRegistry, 
@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
 
   loadData() {
     this.productService.getHomePage().subscribe(data => {
+      console.log(data);
       this.listNewProduct = data.listNewProduct;
       this.listBestSeller = data.listBestSeller;
     })

@@ -27,7 +27,7 @@ export class ManageUserService {
     .pipe(catchError(this.handleError));
   }
 
-  //Lấy toàn bộ danh sách user
+  //Lấy tổng slg user
   countUsers(): Observable<any> {
     const url= `${this.REST_API_SERVER}/admin/user-count`;
     return this.http.get<any>(url, this.httpOptions)

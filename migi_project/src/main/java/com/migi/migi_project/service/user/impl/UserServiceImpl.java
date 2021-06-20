@@ -10,6 +10,7 @@ import com.migi.migi_project.repository.user.UserRepository;
 import com.migi.migi_project.repository.user.UserRoleRepository;
 import com.migi.migi_project.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -56,6 +57,9 @@ public class UserServiceImpl implements UserService {
     public User addUser(UserDTO userDTO) {
         //Set ngày tạo
         userDTO.setCreateDate(Timestamp.valueOf(LocalDateTime.now()));
+        // Hash password using BCrypt
+        String hash = BCrypt.hashpw(userDTO.getPassword(), BCrypt.gensalt(12));
+        userDTO.setPassword(hash);
         //Lưu lại user
         User user = userRepository.save(UserMapper.toUser(userDTO));
         UserRole userRole= new UserRole();

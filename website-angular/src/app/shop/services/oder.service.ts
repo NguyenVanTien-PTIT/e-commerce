@@ -42,6 +42,13 @@ export class OderService {
       .pipe(catchError(this.handleError));
   }
 
+  getHistoryOrders(id:number): Observable<any>{
+    const url = `${this.REST_API_SERVER}/order/history?id-user=${id}`;
+    return this.httpClient
+      .get<any>(url, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
   //Handles error when send data to server
   private handleError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){

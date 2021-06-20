@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class ProductDTO {
     private int id;
+    private int categoryId;
     private String name;
     private String description;
     private Double price;

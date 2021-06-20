@@ -18,7 +18,7 @@
                 </div>
             </owl-carousel>
             <mat-card-content (click)="singleProduct(item.id)">
-                <h3>{{item.price}}đ</h3>
+                <h3>{{item.price | currency: "VND"}}</h3>
                 <span>{{item.name }}</span>
             </mat-card-content>
             <mat-card-actions>

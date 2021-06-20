@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -19,4 +20,5 @@ public class UserDTO {
     private String phoneNumber;
     private String address;
     private Timestamp createDate;
+    private Collection<String> roles;
 }

@@ -22,7 +22,7 @@ public class OrdersMapper {
         String result = simpleDateFormat.format(orders.getOrderDate());
         ordersDTO.setOrderDate(result);
         ordersDTO.setStatus(orders.getStatus());
-
+        ordersDTO.setIdUser(orders.getUserByIdUser().getId());
         return ordersDTO;
     }
 

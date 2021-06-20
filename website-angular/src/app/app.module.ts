@@ -1,3 +1,4 @@
+import { OrderPageModule } from './shop/myprofile/shopping-cart/order-page.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -66,7 +67,10 @@ import { ManageUsersComponent } from './admin/components/manage-users/manage-use
 import { ManageProductsComponent } from './admin/components/manage-products/manage-products.component';
 import { PopupDeleteComponent } from './admin/components/manage-users/popup-delete/popup-delete.component';
 import { ActionPopupComponent } from './admin/components/manage-users/action-popup/action-popup.component';
-import { DeletePopupComponent } from './admin/components/manage-products/delete-popup/delete-popup.component';
+import { DeleteProductPopupComponent } from './admin/components/manage-products/delete-popup/delete-popup.component';
+import { ActionProductPopupComponent } from './admin/components/manage-products/action-popup/action-popup.component';
+import { CategoryActionPopupComponent } from './admin/components/manage-products/category-action-popup/category-action-popup.component';
+import { CategoryDeletePopupComponent } from './admin/components/manage-products/category-delete-popup/category-delete-popup.component';
   
 @NgModule({
   declarations: [
@@ -94,7 +98,10 @@ import { DeletePopupComponent } from './admin/components/manage-products/delete-
     ManageProductsComponent,
     PopupDeleteComponent,
     ActionPopupComponent,
-    DeletePopupComponent
+    DeleteProductPopupComponent,
+    ActionProductPopupComponent,
+    CategoryActionPopupComponent,
+    CategoryDeletePopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -140,6 +147,7 @@ import { DeletePopupComponent } from './admin/components/manage-products/delete-
        timeOut: 500,
        progressAnimation: 'increasing',
      }),
+     OrderPageModule
   ],
   providers: [
     {
@@ -150,6 +158,12 @@ import { DeletePopupComponent } from './admin/components/manage-products/delete-
 
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent, PopupDeleteComponent, ActionPopupComponent]
+  entryComponents: [LoginComponent, 
+    PopupDeleteComponent,
+    ActionPopupComponent, 
+    ActionProductPopupComponent,
+    DeleteProductPopupComponent,
+    CategoryActionPopupComponent,
+    CategoryDeletePopupComponent]
 })
 export class AppModule { }

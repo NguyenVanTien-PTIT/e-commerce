@@ -15,6 +15,7 @@ import com.migi.migi_project.repository.user.OrderRepository;
 import com.migi.migi_project.repository.user.ProductRepository;
 import com.migi.migi_project.service.user.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -133,5 +134,15 @@ public class OrderServiceImpl implements OrderService {
         ordersDTO.setIdUser(orderProduct.getOrdersByIdOrder().getUserByIdUser().getId());
         orderProductDTO.setOrdersDTO(ordersDTO);
         return orderProductDTO;
+    }
+
+    @Override
+    public List<OrdersDTO> getListOrderHistory(Integer idUser) {
+        List<Orders> ordersList = orderRepository.getListOrderHistory(idUser);
+        List<OrdersDTO> result = new ArrayList<>();
+        for(Orders o: ordersList){
+            result.add(OrdersMapper.toOrdersDTO(o));
+        }
+        return result;
     }
 }

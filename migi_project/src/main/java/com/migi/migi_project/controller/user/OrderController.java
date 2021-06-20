@@ -11,6 +11,8 @@ import com.migi.migi_project.security.CustomUserDetails;
 import com.migi.migi_project.service.user.OrderService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,12 +43,18 @@ public class OrderController {
         return ResponseEntity.ok(orderPage);
     }
 
+    @GetMapping(value = "/order/history")
+    public ResponseEntity<?> getListOrderHistory(@RequestParam(value = "id-user") Integer idUser){
+        return ResponseEntity.ok(orderService.getListOrderHistory(idUser));
+    }
+
     @PostMapping(value = "/order/payment/{id}")
-    public ResponseEntity<?> paymentOrder(@RequestBody OrdersDTO orderDTO,@PathVariable(value = "id") Integer idUser){
+    public ResponseEntity<?> paymentOrder(@RequestBody OrdersDTO orderDTO,
+                                          @PathVariable(value = "id") Integer idUser){
         orderDTO.setIdUser(idUser);
         AddProductToOrderResponse response = new AddProductToOrderResponse(
                                                     orderService.updateOrder(orderDTO),
-                                                    "Thanh toán thành công"
+                                                    "Đơn hàng đã đang được đợi xác nhận!"
                                                 );
         return ResponseEntity.ok(response);
     }

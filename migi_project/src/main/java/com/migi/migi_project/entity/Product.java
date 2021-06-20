@@ -22,6 +22,7 @@ public class Product {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -71,7 +72,7 @@ public class Product {
     }
 
     @Basic
-    @Column(name = "createDate")
+    @Column(name = "create_date")
     public Timestamp getCreateDate() {
         return createDate;
     }

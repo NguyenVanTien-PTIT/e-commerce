@@ -37,7 +37,7 @@
             </owl-carousel>
             <mat-card-content (click)="productHome(item.id)">
                 <p>{{item.name}}</p>
-                <p>{{item.price}}đ</p>
+                <p>{{item.price | currency: "VND"}}</p>
             </mat-card-content>
             <mat-card-actions>
                 <button mat-button mat-stroked-button color="primary" class="button" (click)="addToCart(item.id)">

@@ -5,9 +5,15 @@ import com.migi.migi_project.model.dto.ProductDTO;
 
 public class ProductMapper {
     public static ProductDTO toProductDTO(Product product){
-        return new ProductDTO(product.getId(),
-                product.getName(),product.getDescription(), product.getPrice(),
-                product.getImage(), product.getCreateDate());
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(product.getId());
+        productDTO.setName(product.getName());
+        productDTO.setPrice(product.getPrice());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setImage(product.getImage());
+        productDTO.setCreateDate(product.getCreateDate());
+        productDTO.setCategoryId(product.getCategoryByIdCategory().getId());
+        return productDTO;
     }
 
     public static Product toProduct(ProductDTO productDTO){
