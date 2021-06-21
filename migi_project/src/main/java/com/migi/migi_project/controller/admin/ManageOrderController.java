@@ -1,5 +1,6 @@
 package com.migi.migi_project.controller.admin;
 
+import com.migi.migi_project.model.dto.OrdersDTO;
 import com.migi.migi_project.service.admin.ManageOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -28,5 +29,15 @@ public class ManageOrderController {
     @PutMapping(value = "/admin/order-confirm/{id}")
     public ResponseEntity<?> confirmOrder(@PathVariable(value = "id") Integer id){
         return ResponseEntity.ok(manageOrderService.confirmOrder(id));
+    }
+
+    @PutMapping(value = "/admin/order")
+    public ResponseEntity<?> updateOrder(@RequestBody OrdersDTO ordersDTO){
+        return ResponseEntity.ok(manageOrderService.updateOrder(ordersDTO));
+    }
+
+    @DeleteMapping(value = "/admin/order")
+    public ResponseEntity<?> deleteOrder(@RequestParam Integer id){
+        return ResponseEntity.ok(manageOrderService.deleteOrder(id));
     }
 }

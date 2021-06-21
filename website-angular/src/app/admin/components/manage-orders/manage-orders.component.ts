@@ -1,3 +1,6 @@
+import { OrderDeletePopupComponent } from './delete-popup/order-delete-popup.component';
+import { OrderActionPopupComponent } from './action-popup/order-action-popup.component';
+import { MatDialog } from '@angular/material';
 import { ManageOrderService } from '../../services/manage-order.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
@@ -15,12 +18,15 @@ export class ManageOrdersComponent implements OnInit {
   totalOrders:number;
   status:any = {
     0: 'Đang đặt hàng',
-    1: 'Đã thanh toán',
-    2: 'Đã giao'
+    1: 'Chờ xác nhận',
+    2: 'Đang giao hàng',
+    3: 'Đã giao hàng'
   };
+
   constructor(
     private manageOrderService: ManageOrderService, 
-    private toast: ToastrService) { }
+    private toast: ToastrService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.page = 1;
@@ -50,6 +56,7 @@ export class ManageOrdersComponent implements OnInit {
     this.getOrderByStatus(this.statusCurrent);
   }
 
+  //Click duyệt
   changeStatus(id:number){
     //Duyệt sang xác nhận
     if(this.statusCurrent === 1){
@@ -59,6 +66,7 @@ export class ManageOrdersComponent implements OnInit {
         }else{
           this.toast.error(data.msg);
         }
+        this.page = 1;
         this.loadData();
       })
     }
@@ -70,9 +78,51 @@ export class ManageOrdersComponent implements OnInit {
         }else{
           this.toast.error(data.msg);
         }
+        this.page = 1;
         this.loadData();
       })
     }
   }
 
+  //Sửa đơn hàng
+  edit(u: any, action: string){
+    u.action = action;
+    const dialogRef = this.dialog.open(OrderActionPopupComponent, {data: u});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(!result){
+        return;
+      }
+      if(result.event === 'edit'){
+        this.manageOrderService.updateOrder(result.data).subscribe(data => {
+          if(data.httpStatus === 'OK'){
+            this.toast.success(data.msg);
+          }else{
+            this.toast.error(data.msg);
+          }
+          this.loadData();
+        })
+      }
+    })
+  }
+
+  delete(u, action){
+    u.action = action;
+    const dialogRef = this.dialog.open(OrderDeletePopupComponent, {data: u});
+    dialogRef.afterClosed().subscribe(result => {
+      if(!result){
+        return;
+      }
+      if(result.event === 'delete'){
+        this.manageOrderService.deleteOrder(result.data.id).subscribe(data => {
+          if(data.httpStatus === 'OK'){
+            this.toast.success(data.msg);
+          }else{
+            this.toast.error(data.msg);
+          }
+          this.loadData();
+        });
+      }
+    })
+  }
 }

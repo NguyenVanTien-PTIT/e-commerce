@@ -13,4 +13,7 @@ public interface OrderProductRepository extends JpaRepository<OrderProduct, Inte
     @Query(value = "SELECT op.* FROM order_product as op WHERE op.id_order =?1 AND op.id_product=?2 ",
             nativeQuery = true)
     Optional<OrderProduct> findByIdOrderAndIdProduct(Integer idOrder, Integer idProduct);
+
+//    @Query(value = "DELETE FROM order_product as op WHERE op.id_order =?1 ", nativeQuery = true)
+//    void deleteByIdOrder(Integer idOrder);
 }

@@ -1,3 +1,4 @@
+import { OrderActionPopupComponent } from './admin/components/manage-orders/action-popup/order-action-popup.component';
 import { OrderPageModule } from './shop/myprofile/shopping-cart/order-page.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -71,7 +72,7 @@ import { DeleteProductPopupComponent } from './admin/components/manage-products/
 import { ActionProductPopupComponent } from './admin/components/manage-products/action-popup/action-popup.component';
 import { CategoryActionPopupComponent } from './admin/components/manage-products/category-action-popup/category-action-popup.component';
 import { CategoryDeletePopupComponent } from './admin/components/manage-products/category-delete-popup/category-delete-popup.component';
-  
+import { OrderDeletePopupComponent } from './admin/components/manage-orders/delete-popup/order-delete-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,6 +103,8 @@ import { CategoryDeletePopupComponent } from './admin/components/manage-products
     ActionProductPopupComponent,
     CategoryActionPopupComponent,
     CategoryDeletePopupComponent,
+    OrderDeletePopupComponent,
+    OrderActionPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -164,6 +167,8 @@ import { CategoryDeletePopupComponent } from './admin/components/manage-products
     ActionProductPopupComponent,
     DeleteProductPopupComponent,
     CategoryActionPopupComponent,
-    CategoryDeletePopupComponent]
+    CategoryDeletePopupComponent,
+    OrderDeletePopupComponent,
+    OrderActionPopupComponent]
 })
 export class AppModule { }

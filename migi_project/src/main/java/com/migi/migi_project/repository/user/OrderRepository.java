@@ -28,4 +28,8 @@ public interface OrderRepository extends JpaRepository<Orders, Integer> {
 
     @Query(value = "SELECT o.* FROM orders as o WHERE status != 0 AND id_user=?1 ORDER BY o.id DESC", nativeQuery = true)
     List<Orders> getListOrderHistory(Integer idUser);
+
+    //admin ;;;;
+    @Query(value = "SELECT o.* FROM orders as o WHERE status = ?1 AND id_user=?2", nativeQuery = true)
+    List<Orders> findOrdersByStatusAndIdUser(Integer status, Integer idUser);
 }

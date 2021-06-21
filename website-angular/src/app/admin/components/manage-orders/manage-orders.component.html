@@ -47,7 +47,7 @@
                 <th scope="col">Ngày đặt</th>
                 <th scope="col">Tổng tiền</th>
                 <th scope="col">Trạng thái</th>
-                <th scope="col">Thao tác</th>
+                <th scope="col" *ngIf="statusCurrent !== 0">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,10 +79,13 @@
                     <td>
                         <p class="lead">{{u.totalprice}}</p>
                     </td>
-                    <td>
-                        <p class="lead">{{u.status}}</p>
+                    <td [ngStyle]="{'background-color':
+                        u.status === 3 ? 'rgb(48, 202, 94)' : 
+                           ( u.status === 1 ? 'rgb(255, 111, 85)' : 
+                           (u.status === 0 ? 'rgb(2, 216, 253)' : 'rgb(253, 195, 4)'))}">
+                        <p class="lead">{{status[u.status]}}</p>
                     </td>
-                    <td>
+                    <td *ngIf="statusCurrent !== 0">
                         <button class="btn btn-info" (click)="edit(u, 'edit')">
                             Sửa
                         </button>

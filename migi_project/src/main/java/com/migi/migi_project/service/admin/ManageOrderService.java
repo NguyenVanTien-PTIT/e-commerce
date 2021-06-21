@@ -10,4 +10,6 @@ public interface ManageOrderService {
     List<OrdersDTO> findOrderByStatus(Integer status, Pageable pageable);
     Long countOdersByStatus(Integer status);
     ResponseNormal confirmOrder(Integer id);
+    ResponseNormal updateOrder(OrdersDTO ordersDTO);
+    ResponseNormal deleteOrder(Integer id);
 }

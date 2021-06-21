@@ -1,10 +1,14 @@
 package com.migi.migi_project.service.admin.impl;
 
+import com.migi.migi_project.entity.OrderProduct;
 import com.migi.migi_project.entity.Orders;
+import com.migi.migi_project.entity.User;
 import com.migi.migi_project.model.dto.OrdersDTO;
 import com.migi.migi_project.model.mapper.OrdersMapper;
 import com.migi.migi_project.model.response.ResponseNormal;
+import com.migi.migi_project.repository.user.OrderProductRepository;
 import com.migi.migi_project.repository.user.OrderRepository;
+import com.migi.migi_project.repository.user.UserRepository;
 import com.migi.migi_project.service.admin.ManageOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +22,10 @@ import java.util.List;
 public class ManageOrderServiceImpl implements ManageOrderService {
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private OrderProductRepository orderProductRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<OrdersDTO> findOrderByStatus(Integer status, Pageable pageable) {
@@ -50,5 +58,40 @@ public class ManageOrderServiceImpl implements ManageOrderService {
         else{
             return new ResponseNormal("Đơn hàng đang trong trạng thái đặt hàng, không được duyệt!", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Override
+    public ResponseNormal updateOrder(OrdersDTO ordersDTO) {
+        if(ordersDTO.getStatus() == 0 ){
+            List<Orders> ordersList = orderRepository.findOrdersByStatusAndIdUser(0, ordersDTO.getIdUser());
+            if(ordersList.size() == 0 ){
+                Orders orders = OrdersMapper.toOrders(ordersDTO);
+                User user = userRepository.findById(ordersDTO.getIdUser()).get();
+                orders.setUserByIdUser(user);
+                orderRepository.save(orders);
+                return new ResponseNormal("Cập nhật thành công!", HttpStatus.OK);
+            } else {
+                return new ResponseNormal("Người dùng " + ordersDTO.getNameUser() + " đang đặt hàng, không thể cập nhật",
+                        HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            Orders orders = OrdersMapper.toOrders(ordersDTO);
+            User user = userRepository.findById(ordersDTO.getIdUser()).get();
+            orders.setUserByIdUser(user);
+            orderRepository.save(orders);
+            return new ResponseNormal("Cập nhật thành công!", HttpStatus.OK);
+        }
+    }
+
+    @Override
+    public ResponseNormal deleteOrder(Integer id) {
+        List<OrderProduct> orderProducts = orderProductRepository.findByIdOrder(id);
+        if(orderProducts.size() > 0){
+            for(OrderProduct o : orderProducts){
+                orderProductRepository.delete(o);
+            }
+        }
+        orderRepository.deleteById(id);
+        return new ResponseNormal("Xóa thành công!", HttpStatus.OK);
     }
 }

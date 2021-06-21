@@ -33,6 +33,18 @@ export class ManageOrderService {
       .pipe(catchError(this.handleError));
   }
 
+  updateOrder(order: any){
+    const url= `${this.REST_API_SERVER}/admin/order`;
+    return this.http.put<any>(url, order, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteOrder(id: number){
+    const url= `${this.REST_API_SERVER}/admin/order?id=${id}`;
+    return this.http.delete<any>(url, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
    //Handles error when send data to server
   private handleError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){
