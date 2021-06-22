@@ -73,6 +73,9 @@ import { ActionProductPopupComponent } from './admin/components/manage-products/
 import { CategoryActionPopupComponent } from './admin/components/manage-products/category-action-popup/category-action-popup.component';
 import { CategoryDeletePopupComponent } from './admin/components/manage-products/category-delete-popup/category-delete-popup.component';
 import { OrderDeletePopupComponent } from './admin/components/manage-orders/delete-popup/order-delete-popup.component';
+import { CKEditorModule } from 'ngx-ckeditor';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,7 +107,7 @@ import { OrderDeletePopupComponent } from './admin/components/manage-orders/dele
     CategoryActionPopupComponent,
     CategoryDeletePopupComponent,
     OrderDeletePopupComponent,
-    OrderActionPopupComponent
+    OrderActionPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -150,7 +153,10 @@ import { OrderDeletePopupComponent } from './admin/components/manage-orders/dele
        timeOut: 500,
        progressAnimation: 'increasing',
      }),
-     OrderPageModule
+     OrderPageModule,
+     CKEditorModule,
+     MaterialFileInputModule,
+     NgxChartsModule,
   ],
   providers: [
     {

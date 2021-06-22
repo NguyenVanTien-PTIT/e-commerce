@@ -81,7 +81,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Tên</th>
                 <th scope="col">Giá</th>
-                <th scope="col">Mô tả</th>
+                <th scope="col" class="description-product">Mô tả</th>
                 <th scope="col">Hình ảnh</th>
                 <th scope="col">Ngày tạo</th>
                 <th scope="col">Thao tác</th>
@@ -98,14 +98,14 @@
                     <td>
                         <p class="lead">{{u.id}}</p>
                     </td>
-                    <td>
+                    <td class="description">
                         <p class="lead">{{u.name}}</p>
                     </td>
                     <td>
                         <p class="lead">{{u.price}}</p>
                     </td>
                     <td class="description">
-                        <p class="lead">{{u.description}}</p>
+                        <p class="lead" class="description-product">{{u.description}}</p>
                     </td>
                     <td>
                         <p class="lead">{{u.image}}</p>

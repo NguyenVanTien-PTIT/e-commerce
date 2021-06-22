@@ -27,6 +27,27 @@ export class ManageUsersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.checkUser();
+  }
+
+  checkUser(){
+    let currentUser = JSON.parse(localStorage.getItem('userCurrent'));
+
+    if(!currentUser){
+      this.router.navigate(['/home']);
+      return;
+    }
+    let checked = false;
+    currentUser.roles.forEach(role =>{
+      if(role === 'ADMIN'){
+        checked = true;
+      }
+    })
+    if(!checked){
+      this.toast.error('Từ chối truy cập');
+      this.router.navigate(['/home']);
+      return;
+    }
     this.loadUsers();
   }
 

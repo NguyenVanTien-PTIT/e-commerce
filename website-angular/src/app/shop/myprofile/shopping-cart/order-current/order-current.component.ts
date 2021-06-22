@@ -124,4 +124,7 @@ export class OrderCurrentComponent implements OnInit {
     this.router.navigate(['product/'+id]);
   }
 
+  getPathImage(image:string) : string{
+    return '../../../assets/images/'+ image;
+  }
 }

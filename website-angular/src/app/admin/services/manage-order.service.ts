@@ -45,6 +45,12 @@ export class ManageOrderService {
       .pipe(catchError(this.handleError));
   }
 
+  getRevenue(year: number){
+    const url= `${this.REST_API_SERVER}/admin/revenue?year=${year}`;
+    return this.http.get<any>(url, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
    //Handles error when send data to server
   private handleError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){

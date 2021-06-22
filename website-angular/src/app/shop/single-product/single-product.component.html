@@ -1,7 +1,7 @@
 <div class="single-product">
     <div class="conatiner" *ngIf="product">
         <div class="product-img-container">
-            <img class="productImg" mat-card-image style="width: 100%; padding: 20px;" [src]="product.image"
+            <img class="productImg" mat-card-image style="width: 100%; padding: 20px;" [src] = getPathImage(product.image)
                 alt="Photo of a Shiba Inu">
     
         </div>
@@ -13,7 +13,7 @@
                 <span class="sold">500 Sold</span>
             </div>
             <h2 style="font-weight: 400;"> {{product.price | currency: "VND"}} </h2>
-            <div class="description"> {{product.description}} </div>
+            <div class="description" [innerHTML]="product.description"></div>
     
             <br><br>
             <div class="button-group">
@@ -35,7 +35,7 @@
     <mat-tab-group>
         <mat-tab label="Mô tả">
             <h2 style="font-weight: 400;">{{product.name}}</h2>
-            <div class="description"> {{product.description}}</div>
+            <div class="description"  [innerHTML]= "product.description"></div>
         </mat-tab>
         <mat-tab label="Nhà sản xuất">
             <h2 style="font-weight: 400;">Manufactured By Nike</h2>
@@ -85,8 +85,8 @@
     <div class="body">
         <mat-card class="example-card" 
         *ngFor="let item of simillarProducts">
-            <img class="productImg" mat-card-image src="{{item.image}}" 
-            alt="{{item.name}}" (click)="productDetail(item.id)">
+            <img class="productImg" mat-card-image [src]= getPathImage(item.image) 
+            alt="{{item.name}}" >
             <mat-card-content (click)="productDetail(item.id)">
                 <p> {{item.name}} </p>
                 <p>{{item.price}} đ</p>
@@ -111,7 +111,7 @@
     </div>
     <div class="mobile-card" *ngFor="let item of simillarProducts" (click)="productDetail()">
         <div class="header">
-            <img width="150px" height="150px" src="{{item.image}}" alt="{{item.name}}">
+            <img width="150px" height="150px" [src]= getPathImage(item.image) alt="{{item.name}}">
         </div>
         <div class="footer">
         </div>

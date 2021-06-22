@@ -63,6 +63,15 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', data.token);
         localStorage.setItem('userCurrent', currentUser);
         this.user.username = this.loginForm.value.username;
+        for(let i of data.userDTO.roles){
+          if(i === "ADMIN"){
+            this.toastr.success(data.msg);
+            this.onNoClick();
+            window.location.reload();
+            this.router.navigate(['admin/dashboard']);
+            return;
+          }
+        }
         this.onNoClick();
         window.location.reload();
         this.toastr.success(data.msg);

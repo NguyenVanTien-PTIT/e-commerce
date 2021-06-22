@@ -4,12 +4,14 @@ import com.migi.migi_project.entity.OrderProduct;
 import com.migi.migi_project.entity.Orders;
 import com.migi.migi_project.entity.User;
 import com.migi.migi_project.model.dto.OrdersDTO;
+import com.migi.migi_project.model.dto.Revenue;
 import com.migi.migi_project.model.mapper.OrdersMapper;
 import com.migi.migi_project.model.response.ResponseNormal;
 import com.migi.migi_project.repository.user.OrderProductRepository;
 import com.migi.migi_project.repository.user.OrderRepository;
 import com.migi.migi_project.repository.user.UserRepository;
 import com.migi.migi_project.service.admin.ManageOrderService;
+import com.migi.migi_project.utils.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -94,4 +96,19 @@ public class ManageOrderServiceImpl implements ManageOrderService {
         orderRepository.deleteById(id);
         return new ResponseNormal("Xóa thành công!", HttpStatus.OK);
     }
+
+    @Override
+    public List<Revenue> getRevenue(String year) {
+        String sub = year.substring(2, 4);
+        List<Object[]> objects = orderRepository.getRevenue(sub);
+        List<Revenue> revenues = new ArrayList<>();
+        for(Object[] o: objects){
+            Revenue revenue = new Revenue();
+            revenue.setName("Tháng "+ DataUtils.safeToString(o[0]));
+            revenue.setValue(DataUtils.safeToDouble(o[1]));
+            revenues.add(revenue);
+        }
+        return revenues;
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.migi.migi_project.repository.user;
 
 import com.migi.migi_project.entity.Orders;
+import com.migi.migi_project.model.dto.Revenue;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -32,4 +33,9 @@ public interface OrderRepository extends JpaRepository<Orders, Integer> {
     //admin ;;;;
     @Query(value = "SELECT o.* FROM orders as o WHERE status = ?1 AND id_user=?2", nativeQuery = true)
     List<Orders> findOrdersByStatusAndIdUser(Integer status, Integer idUser);
+
+    @Query(value = "SELECT date_format(order_date,'%m') as name, sum(totalprice) as value from orders \n" +
+            " WHERE date_format(order_date,'%y') = ?1 AND status = 3 GROUP BY date_format(order_date,'%m')",
+    nativeQuery = true)
+    List<Object[]> getRevenue(String year);
 }

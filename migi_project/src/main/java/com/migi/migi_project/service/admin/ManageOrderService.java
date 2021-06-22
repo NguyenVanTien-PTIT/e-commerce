@@ -1,6 +1,7 @@
 package com.migi.migi_project.service.admin;
 
 import com.migi.migi_project.model.dto.OrdersDTO;
+import com.migi.migi_project.model.dto.Revenue;
 import com.migi.migi_project.model.response.ResponseNormal;
 import org.springframework.data.domain.Pageable;
 
@@ -12,4 +13,5 @@ public interface ManageOrderService {
     ResponseNormal confirmOrder(Integer id);
     ResponseNormal updateOrder(OrdersDTO ordersDTO);
     ResponseNormal deleteOrder(Integer id);
+    List<Revenue> getRevenue(String year);
 }

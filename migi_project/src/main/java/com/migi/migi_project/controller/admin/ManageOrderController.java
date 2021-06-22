@@ -26,6 +26,11 @@ public class ManageOrderController {
         return ResponseEntity.ok(manageOrderService.countOdersByStatus(status));
     }
 
+    @GetMapping(value = "/admin/revenue")
+    public ResponseEntity<?> getYears(@RequestParam(value = "year") String year){
+        return ResponseEntity.ok(manageOrderService.getRevenue(year));
+    }
+
     @PutMapping(value = "/admin/order-confirm/{id}")
     public ResponseEntity<?> confirmOrder(@PathVariable(value = "id") Integer id){
         return ResponseEntity.ok(manageOrderService.confirmOrder(id));

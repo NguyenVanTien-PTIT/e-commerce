@@ -156,6 +156,8 @@ export class ProductsComponent implements OnInit {
     return value;
   }
 
-
+  getPathImage(image:string) : string{
+    return '../../../assets/images/'+ image;
+  }
 }
 

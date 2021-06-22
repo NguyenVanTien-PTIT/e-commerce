@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { ManageOrderService } from '../../services/manage-order.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-orders',
@@ -26,12 +27,34 @@ export class ManageOrdersComponent implements OnInit {
   constructor(
     private manageOrderService: ManageOrderService, 
     private toast: ToastrService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit() {
     this.page = 1;
     this.statusCurrent = 0;
     this.loadData();
+    this.checkUser();
+  }
+
+  checkUser(){
+    let currentUser = JSON.parse(localStorage.getItem('userCurrent'));
+
+    if(!currentUser){
+      this.router.navigate(['/home']);
+      return;
+    }
+    let checked = false;
+    currentUser.roles.forEach(role =>{
+      if(role === 'ADMIN'){
+        checked = true;
+      }
+    })
+    if(!checked){
+      this.toast.error('Từ chối truy cập');
+      this.router.navigate(['/home']);
+      return;
+    }
   }
 
   loadData(){
@@ -66,7 +89,10 @@ export class ManageOrdersComponent implements OnInit {
         }else{
           this.toast.error(data.msg);
         }
-        this.page = 1;
+        if(this.orders.length == 1 && this.page!== 1){
+          this.page -= 1;
+        }
+        console.log(this.orders)
         this.loadData();
       })
     }
@@ -78,7 +104,9 @@ export class ManageOrdersComponent implements OnInit {
         }else{
           this.toast.error(data.msg);
         }
-        this.page = 1;
+        if(this.orders.length == 1 && this.page!== 1){
+          this.page -= 1;
+        }
         this.loadData();
       })
     }

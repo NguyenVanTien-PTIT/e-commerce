@@ -127,7 +127,8 @@
     margin: 2px;
 }
 
-.example-card .productImg {
+.example-card .productImg,
+.mobile-card .header img {
     object-fit: cover;
     object-position: top;
 }

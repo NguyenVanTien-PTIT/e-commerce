@@ -6,11 +6,13 @@ import com.migi.migi_project.model.dto.ProductDTO;
 import com.migi.migi_project.model.dto.UserDTO;
 import com.migi.migi_project.model.response.PageableModel;
 import com.migi.migi_project.service.admin.ManagerProductService;
+import com.migi.migi_project.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
@@ -82,5 +84,13 @@ public class ManageProductController {
     @DeleteMapping(value = "admin/category/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable(value = "id") Integer id){
         return ResponseEntity.ok(productService.deleteCategory(id));
+    }
+
+    //Nhận upload ảnh
+    @PostMapping(value = "/admin/upload-img")
+    public ResponseEntity<?> receiveImage(@RequestParam(value = "image") MultipartFile[] multipartFiles){
+        MultipartFile multipartFile = multipartFiles[0];
+        return ResponseEntity.ok(productService.uploadFile(multipartFile));
+//        return ResponseEntity.ok(manageOrderService.deleteOrder(id));
     }
 }

@@ -15,7 +15,7 @@ export class CategoryActionPopupComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CategoryActionPopupComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder     
+    private fb: FormBuilder,  
   ) { 
     this.action = data.action;
     this.category = data;

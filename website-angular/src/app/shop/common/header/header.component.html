@@ -51,6 +51,9 @@
                 <li class="contain" *ngIf="userCurrent" (click)="showCart()">
                     <mat-icon>add_shopping_cart</mat-icon>
                 </li>
+                <li class="contain" [routerLink]="['/admin/dashboard']" routerLinkActive="active" *ngIf="isAdmin">
+                    <span>DASHBOARD</span>
+                </li>
                 <li class="contain" [routerLink]="['/admin/order']" routerLinkActive="active" *ngIf="isAdmin">
                     <span>MANAGE-ORDER</span>
                 </li>

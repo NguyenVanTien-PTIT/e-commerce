@@ -156,3 +156,11 @@
     font-size: 22px;
     font-weight: 500;
 }
+
+.description {
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;// giới hạn 2 dòng
+}

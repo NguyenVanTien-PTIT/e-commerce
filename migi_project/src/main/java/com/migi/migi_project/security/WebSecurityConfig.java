@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/order/**").hasAnyAuthority("USER")
+                .antMatchers("/order/**").hasAnyAuthority("USER", "ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 //Xử lý từ chối truy cập

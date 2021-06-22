@@ -1,3 +1,4 @@
+import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { ManageOrdersComponent } from './admin/components/manage-orders/manage-orders.component';
 import { ManageUsersComponent } from './admin/components/manage-users/manage-users.component';
 import { NgModule } from '@angular/core';
@@ -79,6 +80,10 @@ const routes: Routes = [
   { path: '*', redirectTo: 'home', pathMatch: 'full' },
 
   //admin
+  {
+    path: 'admin/dashboard',
+    component: DashboardComponent
+  },
   {
     path: 'admin/user',
     component: ManageUsersComponent

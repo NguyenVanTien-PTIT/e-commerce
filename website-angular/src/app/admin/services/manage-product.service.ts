@@ -13,6 +13,11 @@ export class ManageProductService {
       'Content-Type': 'application/json',
     })
   }
+  private httpFileUpload = {
+    headers: new HttpHeaders({ 
+      'Content-Type': 'multipart/form-data',
+    })
+  }
   private REST_API_SERVER = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
@@ -84,6 +89,13 @@ export class ManageProductService {
     const url= `${this.REST_API_SERVER}/admin/category/${id}`;
     return this.http.delete<any>(url, this.httpOptions)
       .pipe(catchError(this.handleError));
+  }
+
+  uploadImage(image: File): Observable<any>  {
+    const formData: FormData = new FormData();
+    formData.append('image', image, image.name);
+    const url= `${this.REST_API_SERVER}/admin/upload-img`;
+    return this.http.post(url, formData);
   }
 
   //Handles error when send data to server

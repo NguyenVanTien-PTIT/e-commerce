@@ -4,7 +4,9 @@ import com.migi.migi_project.model.dto.CategoryDTO;
 import com.migi.migi_project.model.dto.ProductDTO;
 import com.migi.migi_project.model.response.PageableModel;
 import com.migi.migi_project.model.response.ResponseNormal;
+import com.migi.migi_project.model.response.ResponseUploadFile;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,4 +22,5 @@ public interface ManagerProductService {
     ResponseNormal addCategory(CategoryDTO categoryDTO) ;
     ResponseNormal updateCategory(CategoryDTO categoryDTO) ;
     ResponseNormal deleteCategory(Integer id) ;
+    ResponseUploadFile<String> uploadFile(MultipartFile multipartFile);
 }

@@ -79,4 +79,8 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  getPathImage(image:string) : string{
+    return '../../../assets/images/'+ image;
+  }
+
 }

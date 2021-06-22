@@ -8,18 +8,28 @@ import com.migi.migi_project.model.mapper.CategoryMapper;
 import com.migi.migi_project.model.mapper.ProductMapper;
 import com.migi.migi_project.model.response.PageableModel;
 import com.migi.migi_project.model.response.ResponseNormal;
+import com.migi.migi_project.model.response.ResponseUploadFile;
 import com.migi.migi_project.repository.user.CategoryRepository;
 import com.migi.migi_project.repository.user.ProductRepository;
 import com.migi.migi_project.service.admin.ManagerProductService;
+import com.migi.migi_project.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -95,8 +105,12 @@ public class ManagerProductServiceImpl implements ManagerProductService {
 
     @Override
     public ResponseNormal deleteProduct(Integer id) {
-        productRepository.deleteById(id);
-        return new ResponseNormal("Xóa thành công", HttpStatus.OK);
+        try{
+            productRepository.deleteById(id);
+            return new ResponseNormal("Xóa thành công", HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseNormal("Xóa không thành công", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
@@ -135,5 +149,41 @@ public class ManagerProductServiceImpl implements ManagerProductService {
         }
         categoryRepository.deleteById(id);
         return new ResponseNormal("Xóa thành công!", HttpStatus.OK);
+    }
+
+    private static String UPLOAD_DIR = FileUtils.getResourceBasePath()
+                                        .substring(0, FileUtils.getResourceBasePath().length() - 12)+ "\\website-angular\\src\\assets\\images";
+    @Override
+    public ResponseUploadFile<String> uploadFile(MultipartFile multipartFile) {
+        //Tạo thư mục chứa ảnh nếu không tồn tại
+        File uploadDir = new File(UPLOAD_DIR);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+        //Lấy tên file và đuôi mở rộng của file
+        String originalFilename = multipartFile.getOriginalFilename();
+        String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+        if (originalFilename.length() > 0) {
+
+            //Kiểm tra xem file có đúng định dạng không
+            if (!extension.equals("png") && !extension.equals("jpg") && !extension.equals("gif") && !extension.equals("svg") && !extension.equals("jpeg")) {
+                return new ResponseUploadFile("Không hỗ trợ định dạng file này!", HttpStatus.BAD_REQUEST, "");
+            }
+            try {
+                String nameFile = UUID.randomUUID().toString() + "." +extension;
+
+                //Tạo file
+                File file = new File(UPLOAD_DIR + "\\" + nameFile);
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+                bos.write(multipartFile.getBytes());
+                bos.close();
+
+                return new ResponseUploadFile("Upload ảnh thành công!", HttpStatus.OK, nameFile);
+
+            } catch (Exception e) {
+                System.out.println("Có lỗi trong quá trình upload file!");
+            }
+        }
+        return new ResponseUploadFile("File không hợp lệ!", HttpStatus.BAD_REQUEST, "");
     }
 }

@@ -91,6 +91,10 @@ export class SingleProductComponent implements OnInit {
     });
   }
 
+  getPathImage(image:string) : string{
+    return '../../../assets/images/'+ image;
+  }
+
   //Nội dung comment (fix cứng)
   messages = [
     {

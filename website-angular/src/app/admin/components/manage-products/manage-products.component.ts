@@ -35,12 +35,34 @@ export class ManageProductsComponent implements OnInit {
   ngOnInit() {
     this.page = 1;
     this.pageCategory = 1;
+    this.checkUser();
+  }
+  
+  checkUser(){
+    let currentUser = JSON.parse(localStorage.getItem('userCurrent'));
+
+    if(!currentUser){
+      this.route.navigate(['/home']);
+      return;
+    }
+    let checked = false;
+    currentUser.roles.forEach(role =>{
+      if(role === 'ADMIN'){
+        checked = true;
+      }
+    })
+    if(!checked){
+      this.toastr.error('Từ chối truy cập');
+      this.route.navigate(['/home']);
+      return;
+    }
     this.loadData();
   }
 
   loadData() {
     //Lấy ds danh mục
     this.productService.getAllCategory(this.pageCategory, this.pageSize).subscribe((data) =>{
+      console.log('hehehe',data)
       if(data == null){
         this.route.navigate(['/home']);
         this.toastr.error('Từ chối truy cập');
@@ -109,7 +131,11 @@ export class ManageProductsComponent implements OnInit {
     const product: any = {};
     product.action = action;
     product.categories = this.categories;
-    const dialogRef = this.dialog.open(ActionProductPopupComponent, {data: product});
+    const dialogRef = this.dialog.open(ActionProductPopupComponent, {
+      data: product,
+      width: window.innerWidth+'px',
+      maxHeight: 500 + 'px',
+    });
     dialogRef.afterClosed().subscribe(result =>{
       if(!result){
         return;
@@ -118,10 +144,13 @@ export class ManageProductsComponent implements OnInit {
         this.productService.addProduct(result.data).subscribe(data =>{
           if(data.httpStatus === 'OK'){
             this.toastr.success(data.msg);
+            window.location.reload();
           }else{
             this.toastr.error(data.msg);
           }
           this.getListProduct(this.currentCategory);
+        }, error => {
+          this.toastr.error("Lỗi!");
         })
       }
     })
@@ -131,7 +160,11 @@ export class ManageProductsComponent implements OnInit {
   edit(u:any, action:string){
     u.action = action;
     u.categories = this.categories;
-    const dialogRef = this.dialog.open(ActionProductPopupComponent, {data: u});
+    const dialogRef = this.dialog.open(ActionProductPopupComponent, {
+      data: u, 
+      width: window.innerWidth+'px',
+      maxHeight: 500 + 'px',
+    });
     dialogRef.afterClosed().subscribe((result) =>{
       if(result === undefined){
         return;
@@ -140,10 +173,13 @@ export class ManageProductsComponent implements OnInit {
         this.productService.updateProduct(result.data).subscribe(res => {
           if(res.httpStatus === 'OK'){
             this.toastr.success(res.msg);
+            window.location.reload();
           }else{
             this.toastr.error(res.msg);
           }
           this.getListProduct(this.currentCategory);
+        }, error => {
+          this.toastr.error("Lỗi!");
         })
       }
     })
@@ -160,9 +196,9 @@ export class ManageProductsComponent implements OnInit {
       if(res.event === 'delete'){
         this.productService.deleteProduct(res.data.id).subscribe(data =>{
           if(data.httpStatus === 'OK'){
-            this.toastr.success(res.msg);
+            this.toastr.success(data.msg);
           }else{
-            this.toastr.error(res.msg);
+            this.toastr.error(data.msg);
           }
           this.getListProduct(this.currentCategory);
         })

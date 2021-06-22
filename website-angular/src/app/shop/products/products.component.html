@@ -31,7 +31,7 @@
                 [carouselClasses]="['owl-theme', 'row', 'sliding']">
                 <div class="item" (click)="productHome(item.id)">
                     <div class="thumbnail-image">
-                        <img [src]="item.image" class="productImg" mat-card-image />
+                        <img [src]= getPathImage(item.image) class="productImg" mat-card-image />
                     </div>
                 </div>
             </owl-carousel>
