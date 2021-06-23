@@ -48,8 +48,8 @@
                         <a (click)="logout()">Logout</a>
                     </div>
                 </li>
-                <li class="contain" *ngIf="userCurrent" (click)="showCart()">
-                    <mat-icon>add_shopping_cart</mat-icon>
+                <li class="contain" *ngIf="userCurrent" [routerLink]="['shopping-cart/+ userCurrent.id']" routerLinkActive="active">
+                    <mat-icon class="icon">add_shopping_cart</mat-icon>
                 </li>
                 <li class="contain" [routerLink]="['/admin/dashboard']" routerLinkActive="active" *ngIf="isAdmin">
                     <span>DASHBOARD</span>
@@ -65,14 +65,14 @@
                 </li>
             </ul>
         </div>
-        <div class="cart-icon mobile-view" *ngIf="!isLogin">
+        <div class="cart-icon mobile-view" *ngIf="!userCurrent">
             <button mat-stroked-button color="primary" class="button-login" (click)="openLoginDialog()">LOGIN</button>
         </div>
-        <div class="cart-icon mobile-view" *ngIf="userCurrent">
+        <div class="cart-icon mobile-view" *ngIf="userCurrent" >
             <a [routerLink]="['/myprofile/notifications']">
                 <mat-icon>notification_important</mat-icon>
             </a>&nbsp; &nbsp;
-            <mat-icon  (click)="showCart()">add_shopping_cart</mat-icon>
+            <mat-icon [routerLink]="['shopping-cart/+ userCurrent.id']" routerLinkActive="active">add_shopping_cart</mat-icon>
         </div>
 
 

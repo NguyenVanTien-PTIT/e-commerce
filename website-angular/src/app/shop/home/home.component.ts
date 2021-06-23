@@ -79,6 +79,11 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  viewAll(){
+    console.log('hahah')
+    this.router.navigate(['products'])
+  }
+
   getPathImage(image:string) : string{
     return '../../../assets/images/'+ image;
   }

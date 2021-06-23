@@ -76,15 +76,8 @@ export class ManageProductsComponent implements OnInit {
       }
       console.log(data);
       this.currentCategory = data[0].id;
-      //Lấy ds sản phẩm
-      this.productService.getProductsByCategory(this.currentCategory,this.page, this.pageSize).subscribe((res) =>{
-        this.products = res.list;
-      })
-    })
-
-    //Lấy tổng slg sản phẩm
-    this.productService.getCount().subscribe((data) =>{
-      this.totalProducts = data;
+      //Lấy ds sản phẩm và số lượng sản phẩm
+      this.getListProduct(this.currentCategory);
     })
 
     //Lấy tổng slg danh mục

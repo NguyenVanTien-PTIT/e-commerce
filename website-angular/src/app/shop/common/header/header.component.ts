@@ -60,11 +60,6 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  showCart() {
-    this.router.navigate(['shopping-cart/'+this.userCurrent.id])
-  }
-
-
   enableSidenav() {
     this.sidenavEnable = !this.sidenavEnable;
   }
