@@ -53,7 +53,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(private manageOrderService: ManageOrderService, 
     private router: Router,
-    private toastr: ToastrService) {}
+    private toastr: ToastrService) {
+    }
 
   ngOnInit(): void {
     this.checkUser();

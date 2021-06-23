@@ -1,6 +1,6 @@
 <div class="contact-box">
-    <div class="first">+ 1235 2355 98</div>
-    <div class="second">YOUREMAIL@EMAIL.COM</div>
+    <div class="first">CONTACT: 0399617063</div>
+    <div class="second">TIENGIDDY1234@EMAIL.COM</div>
     <div class="third">3-5 BUSINESS DAYS DELIVERY & FREE RETURNS</div>
 </div>
 <mat-progress-bar mode="indeterminate" *ngIf="loadingEnable"></mat-progress-bar>
@@ -33,7 +33,7 @@
                 </li>
 
                 <li class="contain" *ngIf="!userCurrent">
-                    <button mat-stroked-button color="primary" class="button" (click)="openLoginDialog()">LOGIN</button>
+                    <button mat-stroked-button color="primary" class="button-login" (click)="openLoginDialog()">LOGIN</button>
                 </li>
 
                 <li class="contain profile dropdown" *ngIf="userCurrent">
@@ -65,8 +65,8 @@
                 </li>
             </ul>
         </div>
-        <div class="cart-icon mobile-view" *ngIf="!userCurrent">
-            <button mat-stroked-button color="primary" class="button" (click)="openLoginDialog()">LOGIN</button>
+        <div class="cart-icon mobile-view" *ngIf="!isLogin">
+            <button mat-stroked-button color="primary" class="button-login" (click)="openLoginDialog()">LOGIN</button>
         </div>
         <div class="cart-icon mobile-view" *ngIf="userCurrent">
             <a [routerLink]="['/myprofile/notifications']">

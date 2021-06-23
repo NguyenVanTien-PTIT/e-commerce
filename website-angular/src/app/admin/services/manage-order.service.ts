@@ -51,6 +51,12 @@ export class ManageOrderService {
       .pipe(catchError(this.handleError));
   }
 
+  getOderById(id:number){
+    const url= `${this.REST_API_SERVER}/admin/order-detail?id=${id}`;
+    return this.http.get<any>(url, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
    //Handles error when send data to server
   private handleError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){

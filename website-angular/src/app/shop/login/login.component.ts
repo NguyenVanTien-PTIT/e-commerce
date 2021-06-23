@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { HttpClientModule, HttpResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -14,7 +15,6 @@ import { User } from '../interfaces/Ilogin';
 })
 export class LoginComponent implements OnInit {
   private checkSignUp: boolean;
-
   loginForm:FormGroup;
   user = {} as User;
   public signUpForm = new FormGroup({
@@ -63,17 +63,17 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', data.token);
         localStorage.setItem('userCurrent', currentUser);
         this.user.username = this.loginForm.value.username;
+        this.loginService.ckeckHaslogin$.next(true);
         for(let i of data.userDTO.roles){
           if(i === "ADMIN"){
             this.toastr.success(data.msg);
             this.onNoClick();
-            window.location.reload();
+            // window.location.reload();
             this.router.navigate(['admin/dashboard']);
             return;
           }
         }
         this.onNoClick();
-        window.location.reload();
         this.toastr.success(data.msg);
       }else{
         this.toastr.error('Sai tài khoản hoặc mật khẩu');
@@ -97,6 +97,7 @@ export class LoginComponent implements OnInit {
     this.loginService.addUser(this.getNewUser()).subscribe(data =>{
       console.log('Nhận dữ liệu đăng ký user: ');
       console.log(data);
+      this.signUpForm.reset();
       this.toastr.success('Đăng ký thành công!');
 
     })
@@ -115,11 +116,5 @@ export class LoginComponent implements OnInit {
   //Chuyển về đăng nhập
   goToLogin(){
     this.checkSignUp = false;
-  }
-
-  getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
   }
 }

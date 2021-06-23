@@ -76,6 +76,7 @@ import { OrderDeletePopupComponent } from './admin/components/manage-orders/dele
 import { CKEditorModule } from 'ngx-ckeditor';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { OrderDetailComponent } from './admin/components/manage-orders/order-detail/order-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,6 +109,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CategoryDeletePopupComponent,
     OrderDeletePopupComponent,
     OrderActionPopupComponent,
+    OrderDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -175,6 +177,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CategoryActionPopupComponent,
     CategoryDeletePopupComponent,
     OrderDeletePopupComponent,
-    OrderActionPopupComponent]
+    OrderActionPopupComponent,
+    OrderDetailComponent]
 })
 export class AppModule { }

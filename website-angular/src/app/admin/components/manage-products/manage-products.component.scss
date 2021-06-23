@@ -29,3 +29,17 @@ pagination-controls {
 .description-product {
   max-width: 100px;
 }
+
+.list-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.image-product {
+  overflow: hidden;
+  img {
+    width: 100px;
+    height: 160px;
+    object-fit: cover;
+  }
+}

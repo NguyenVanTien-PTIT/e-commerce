@@ -35,16 +35,19 @@ export class HeaderComponent implements OnInit {
     private router: Router, 
     public loginService: LoginService,
     public loadingService: LoadingService,
-    private toastr: ToastrService) { 
+    private toastr: ToastrService,) { 
   
     }
 
 
   ngOnInit() {
-    this.userCurrent = this.loginService.getUserCurrent();
-    console.log('user current',this.userCurrent)
-    this.checkAdmin();
-    console.log(this.isAdmin);
+    this.loginService.ckeckHaslogin$.asObservable().subscribe(data =>{
+      this.isLogin = data;
+      this.userCurrent = this.loginService.getUserCurrent();
+      console.log('user current',this.userCurrent)
+      this.checkAdmin();
+      console.log(this.isAdmin);
+    })
   }
 
   checkAdmin() {
@@ -77,12 +80,14 @@ export class HeaderComponent implements OnInit {
 
   //Đăng xuất
   logout() {
-    this.isAdmin = false;
-    this.userCurrent = null;
     this.toastr.info('Đã đăng xuất')
     localStorage.removeItem('token');
     localStorage.removeItem('userCurrent');
-    window.location.reload();
+    this.isAdmin = false;
+    this.userCurrent = null;
+    this.loginService.ckeckHaslogin$.next(false);
+    this.router.navigate(['home']);
+    // window.location.reload();
   }
 
   //Chuyển sang trang order

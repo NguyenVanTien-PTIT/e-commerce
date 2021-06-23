@@ -3,9 +3,12 @@ package com.migi.migi_project.service.admin.impl;
 import com.migi.migi_project.entity.OrderProduct;
 import com.migi.migi_project.entity.Orders;
 import com.migi.migi_project.entity.User;
+import com.migi.migi_project.model.dto.OrderProductDTO;
 import com.migi.migi_project.model.dto.OrdersDTO;
 import com.migi.migi_project.model.dto.Revenue;
+import com.migi.migi_project.model.mapper.OrderProductMapper;
 import com.migi.migi_project.model.mapper.OrdersMapper;
+import com.migi.migi_project.model.response.OrderPage;
 import com.migi.migi_project.model.response.ResponseNormal;
 import com.migi.migi_project.repository.user.OrderProductRepository;
 import com.migi.migi_project.repository.user.OrderRepository;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ManageOrderServiceImpl implements ManageOrderService {
@@ -109,6 +113,14 @@ public class ManageOrderServiceImpl implements ManageOrderService {
             revenues.add(revenue);
         }
         return revenues;
+    }
+
+    @Override
+    public List<OrderProductDTO> getOrderProductByIdOrder(Integer idOrder) {
+        return orderProductRepository.findByIdOrder(idOrder)
+                .stream()
+                .map(item -> OrderProductMapper.toOrderProductDTO(item))
+                .collect(Collectors.toList());
     }
 
 }

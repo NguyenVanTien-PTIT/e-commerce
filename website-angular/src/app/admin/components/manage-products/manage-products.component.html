@@ -82,7 +82,7 @@
                 <th scope="col">Tên</th>
                 <th scope="col">Giá</th>
                 <th scope="col" class="description-product">Mô tả</th>
-                <th scope="col">Hình ảnh</th>
+                <th scope="col" class="image-product col-2">Hình ảnh</th>
                 <th scope="col">Ngày tạo</th>
                 <th scope="col">Thao tác</th>
               </tr>
@@ -107,8 +107,8 @@
                     <td class="description">
                         <p class="lead" class="description-product">{{u.description}}</p>
                     </td>
-                    <td>
-                        <p class="lead">{{u.image}}</p>
+                    <td class="image-product col-2">
+                        <img [src]=getPathImage(u.image) alt="anh san pham">
                     </td>
                     <td>
                         <p class="lead">{{u.createDate}}</p>

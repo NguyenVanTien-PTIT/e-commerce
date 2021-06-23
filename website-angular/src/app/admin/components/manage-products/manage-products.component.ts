@@ -270,4 +270,9 @@ export class ManageProductsComponent implements OnInit {
       }
     })
   }
+
+  //lay đường dẫn ảnh
+  getPathImage(image:string):string {
+    return '../../../../assets/images/'+ image;
+  }
 }

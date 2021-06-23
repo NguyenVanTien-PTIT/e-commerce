@@ -1,3 +1,4 @@
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrderDeletePopupComponent } from './delete-popup/order-delete-popup.component';
 import { OrderActionPopupComponent } from './action-popup/order-action-popup.component';
 import { MatDialog } from '@angular/material';
@@ -152,5 +153,10 @@ export class ManageOrdersComponent implements OnInit {
         });
       }
     })
+  }
+
+  //Mở chi tiết đơn hàng
+  openOrderDetail(u:any){
+    const dialogRef = this.dialog.open(OrderDetailComponent, {data: u, maxHeight: 500});
   }
 }

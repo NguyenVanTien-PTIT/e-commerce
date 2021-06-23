@@ -48,6 +48,8 @@
                 <th scope="col">Tổng tiền</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col" *ngIf="statusCurrent !== 0">Thao tác</th>
+                <th scope="col" *ngIf="statusCurrent !== 0 && statusCurrent !== 3" >Duyệt</th>
+                <th scope="col">Xem chi tiết</th>
                 </tr>
             </thead>
             <tbody>
@@ -85,16 +87,22 @@
                            (u.status === 0 ? 'rgb(2, 216, 253)' : 'rgb(253, 195, 4)'))}">
                         <p class="lead">{{status[u.status]}}</p>
                     </td>
-                    <td *ngIf="statusCurrent !== 0">
+                    <td *ngIf="statusCurrent !== 0" class="action-order">
                         <button class="btn btn-info" (click)="edit(u, 'edit')">
                             Sửa
                         </button>
-                        <button *ngIf="statusCurrent === 1 || statusCurrent === 2" 
-                        class="btn btn-success" (click)="changeStatus(u.id)">
-                            Duyệt
-                        </button>
                         <button class="btn btn-danger" (click)="delete(u, 'delete')">
                             Xóa
+                        </button>
+                    </td>
+                    <td *ngIf="statusCurrent !== 0 && statusCurrent !== 3">
+                        <button class="btn btn-success" (click)="changeStatus(u.id)">
+                            Duyệt
+                        </button>
+                    </td>
+                    <td>
+                        <button mat-raised-button color="warn" (click)="openOrderDetail(u)">
+                            <mat-icon>reorder</mat-icon>
                         </button>
                     </td>
                 </tr>

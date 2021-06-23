@@ -9,6 +9,8 @@ public class OrderProductMapper {
         orderProductDTO.setId(orderProduct.getId());
         orderProductDTO.setQuantity(orderProduct.getQuantity());
         orderProductDTO.setPrice(orderProduct.getPrice());
+        orderProductDTO.setProductDTO(ProductMapper.toProductDTO(orderProduct.getProductByIdProduct()));
+        orderProductDTO.setOrdersDTO(OrdersMapper.toOrdersDTO(orderProduct.getOrdersByIdOrder()));
         return orderProductDTO;
     }
 
@@ -17,6 +19,8 @@ public class OrderProductMapper {
         orderProduct.setId(orderProductDTO.getId());
         orderProduct.setQuantity(orderProductDTO.getQuantity());
         orderProduct.setPrice(orderProductDTO.getPrice());
+        orderProduct.setOrdersByIdOrder(OrdersMapper.toOrders(orderProductDTO.getOrdersDTO()));
+        orderProduct.setProductByIdProduct(ProductMapper.toProduct(orderProductDTO.getProductDTO()));
         return orderProduct;
     }
 }

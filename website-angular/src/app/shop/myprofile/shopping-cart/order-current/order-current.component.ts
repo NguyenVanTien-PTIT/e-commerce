@@ -44,6 +44,7 @@ export class OrderCurrentComponent implements OnInit {
 
     if(!currentUser){
       this.router.navigate(['/home']);
+      this.toastr.warning('Vui lòng đăng nhập!');
       return;
     }
     
@@ -53,7 +54,7 @@ export class OrderCurrentComponent implements OnInit {
 
       if(!data){
         this.router.navigate(['/home']);
-        this.toastr.warning('Chỉ cho phép user vào xem giỏ hàng');
+        this.toastr.warning('Vui lòng đăng nhập!');
         return;
       }
 
