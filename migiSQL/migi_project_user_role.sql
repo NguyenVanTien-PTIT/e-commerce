@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `migi_project` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `migi_project`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: migi_project
@@ -31,7 +33,7 @@ CREATE TABLE `user_role` (
   KEY `id_user` (`id_user`),
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `role` (`id`),
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +42,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,1,1),(2,4,2),(5,18,2),(6,19,2),(7,20,2),(8,21,2),(9,22,2),(13,33,2),(14,34,2),(15,26,2),(16,35,2),(17,36,1),(21,40,2);
+INSERT INTO `user_role` VALUES (2,4,2),(14,34,2),(16,35,2),(21,40,2),(34,22,1),(35,22,2),(45,26,1),(46,26,2),(64,43,1),(67,44,2),(68,1,1),(69,1,2),(70,45,2),(71,42,1),(72,46,2),(73,47,2);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-07 15:22:48
+-- Dump completed on 2021-06-23 15:41:50
