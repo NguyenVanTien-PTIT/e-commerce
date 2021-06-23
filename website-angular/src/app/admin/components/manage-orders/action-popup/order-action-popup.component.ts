@@ -30,11 +30,11 @@ export class OrderActionPopupComponent implements OnInit {
     this.orderForm = this.fb.group({
       idUser: [{value: '', disabled: true}],
       nameUser: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       address: ['', Validators.required],
-      orderDate: [ {value: '', disable: true}],
-      totalprice: ['', Validators.required],
-      status: ['', Validators.required],
+      orderDate: [ {value: '', disabled: true}],
+      totalprice: [{value: '', disabled: true}],
+      status: [{value: ''}, Validators.required],
     })
     this.loadData();
   }

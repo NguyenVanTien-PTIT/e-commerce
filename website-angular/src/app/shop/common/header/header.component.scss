@@ -1,8 +1,8 @@
 .contact-box{
-    background: #262626;
+    background: #352828;
     display: flex;
     justify-content: center;
-    color: #fff;
+    color: rgb(216, 215, 215);
     font-size: 12px;
     padding: 0px 2%;
 }
@@ -17,8 +17,9 @@
     flex: 2;
 }
 .header-box{
-    background-color: white;
-    box-shadow: 0px 1px 6px rgba(0,0,0,0.3);
+    background: #0f0f0f;
+    color: white;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.3);
 }
 .container{
     display: flex;
@@ -33,7 +34,7 @@
     list-style: none; 
 }
 .list .contain:hover {
-    color: #3f51b5;
+    color: #128b6d;
 }
 .list li{
     display: inline-block;
@@ -47,7 +48,8 @@
 }
 
 .list .active {
-    color: #3f51b5;
+    color: #ffd270;
+    font-weight: 600;
     outline: none;
 }
 // .login-box{
@@ -155,4 +157,16 @@ mat-drawer-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+mat-icon {
+    color: white;
+}
+
+mat-icon:hover {
+    color: #128b6d;
+}
+
+mat-icon.active {
+    color: #ffd270;
 }

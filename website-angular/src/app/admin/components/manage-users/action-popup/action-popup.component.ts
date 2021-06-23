@@ -1,5 +1,5 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Optional, Inject } from '@angular/core';
 
 @Component({
@@ -9,13 +9,7 @@ import { Component, OnInit, Optional, Inject } from '@angular/core';
 })
 export class ActionPopupComponent implements OnInit {
 
-  public profileForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-    fullname: new FormControl(''),
-    phoneNumber: new FormControl(''),
-    address: new FormControl(''),
-  });
+  public profileForm: FormGroup;
 
   private roles: any[] = [
     {
@@ -33,7 +27,8 @@ export class ActionPopupComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ActionPopupComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder
   ) {
     if(data.action === 'edit'){
       this.roleUpdate = data.roles;
@@ -43,6 +38,13 @@ export class ActionPopupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.profileForm = this.fb.group({
+      username: ['', Validators.required],
+      password: [{value: '', disabled: true}],
+      fullname: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      address: ['', Validators.required],
+    })
     this.loadData();
   }
 

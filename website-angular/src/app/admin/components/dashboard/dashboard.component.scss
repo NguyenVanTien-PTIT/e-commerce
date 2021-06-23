@@ -1,13 +1,14 @@
-.stats-cards {
-    .mat-card {
-      overflow: hidden;
-    }
-  }
-  
-  table {
-    width: 100%;
-  }
-
 .title , .years-select, .chart-container{
   margin: 16px 0 20px 60px;
+}
+
+.pie-chart {
+  position: relative;
+  top: -60px;  
+  display: flex;
+}
+
+.bar-vertical {
+  position: relative;
+  top: -60px;  
 }

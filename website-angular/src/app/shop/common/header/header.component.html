@@ -11,7 +11,7 @@
         </div>
         <div class="logo">
             <a [routerLink]="['/home']"> <img
-                    src="https://www.nicepng.com/png/full/247-2475175_ecommerce-e-commerce-website-logo.png"
+                    src="../../../../assets/images/logo.png"
                     width="80px" height="50px">
             </a>
         </div>
@@ -28,8 +28,8 @@
             <ul class="list">
                 <li class="contain" [routerLink]="['/home']" routerLinkActive="active"><span>HOME</span></li>
                 <li class="contain" [routerLink]="['/products']" routerLinkActive="active"><span>PRODUCTS</span></li>
-                <li class="contain" ><span>IMAGES</span></li>
-                <li class="contain" ><span>CONTACT-US</span>
+                <li class="contain" *ngIf="!isAdmin"><span>IMAGES</span></li>
+                <li class="contain" *ngIf="!isAdmin"><span>CONTACT-US</span>
                 </li>
 
                 <li class="contain" *ngIf="!userCurrent">

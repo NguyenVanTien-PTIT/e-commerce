@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   showYAxisLabel: boolean = true;
 
   //Trục Oy
-  yAxisTicks: any[] = [1000000, 5000000, 7000000, 10000000, 20000000, 100000000]
+  yAxisTicks: any[] = [5000000, 10000000, 20000000, 40000000, 60000000]
 
   animations: boolean = true; // animations on load
 
@@ -42,10 +42,14 @@ export class DashboardComponent implements OnInit {
   };
   schemeType: string = 'ordinal'; // 'ordinal' or 'linear'
   //Khoảng cách 2 cột
-  barPadding: number = 10
+  barPadding: number = 50;
   //Hiển thị số lượng khi hover vào cột
   tooltipDisabled: boolean = false;
 
+  //Thuộc tính biểu đồ tròn
+  gradient: boolean = false;
+  showLabels: boolean = true;
+  isDoughnut: boolean = true;
 
   constructor(private manageOrderService: ManageOrderService, 
     private router: Router,
@@ -98,5 +102,18 @@ export class DashboardComponent implements OnInit {
       console.log(data);
       this.revenues = data;
     })
+  }
+
+  //Event biểu đồ tròn
+  onSelect(data): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+  
+  onActivate(data): void {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data): void {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 }
