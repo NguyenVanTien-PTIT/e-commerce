@@ -92,7 +92,7 @@ export class SingleProductComponent implements OnInit {
   }
 
   getPathImage(image:string) : string{
-    return '../../../assets/images/'+ image;
+    return 'http://localhost:8080/uploads/'+ image;
   }
 
   //Nội dung comment (fix cứng)

@@ -14,7 +14,7 @@ public class Orders {
     private Timestamp orderDate;
     private int status;
     private Collection<OrderProduct> orderProductsById;
-    private User userByIdUser;
+        private User userByIdUser;
 
     @Id
     @Column(name = "id")

@@ -1,5 +1,6 @@
 package com.migi.migi_project;
 
+import com.migi.migi_project.utils.FileUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

@@ -151,8 +151,8 @@ public class ManagerProductServiceImpl implements ManagerProductService {
         return new ResponseNormal("Xóa thành công!", HttpStatus.OK);
     }
 
-    private static String UPLOAD_DIR = FileUtils.getResourceBasePath()
-                                        .substring(0, FileUtils.getResourceBasePath().length() - 12)+ "\\website-angular\\src\\assets\\images";
+    private static String UPLOAD_DIR = FileUtils.getResourceBasePath()+ "\\src\\main\\resources\\images";
+
     @Override
     public ResponseUploadFile<String> uploadFile(MultipartFile multipartFile) {
         //Tạo thư mục chứa ảnh nếu không tồn tại
@@ -171,9 +171,9 @@ public class ManagerProductServiceImpl implements ManagerProductService {
             }
             try {
                 String nameFile = UUID.randomUUID().toString() + "." +extension;
-
+                String linkFile = UPLOAD_DIR + "\\" + nameFile;
                 //Tạo file
-                File file = new File(UPLOAD_DIR + "\\" + nameFile);
+                File file = new File(linkFile);
                 BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
                 bos.write(multipartFile.getBytes());
                 bos.close();

@@ -137,7 +137,6 @@ export class ManageProductsComponent implements OnInit {
         this.productService.addProduct(result.data).subscribe(data =>{
           if(data.httpStatus === 'OK'){
             this.toastr.success(data.msg);
-            window.location.reload();
           }else{
             this.toastr.error(data.msg);
           }
@@ -166,7 +165,6 @@ export class ManageProductsComponent implements OnInit {
         this.productService.updateProduct(result.data).subscribe(res => {
           if(res.httpStatus === 'OK'){
             this.toastr.success(res.msg);
-            window.location.reload();
           }else{
             this.toastr.error(res.msg);
           }
@@ -265,7 +263,7 @@ export class ManageProductsComponent implements OnInit {
   }
 
   //lay đường dẫn ảnh
-  getPathImage(image:string):string {
-    return '../../../../assets/images/'+ image;
+  getPathImage(image:string) : string{
+    return 'http://localhost:8080/uploads/'+ image;
   }
 }

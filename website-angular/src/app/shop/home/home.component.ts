@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
   }
 
   getPathImage(image:string) : string{
-    return '../../../assets/images/'+ image;
+    return 'http://localhost:8080/uploads/'+ image;
   }
 
 }
