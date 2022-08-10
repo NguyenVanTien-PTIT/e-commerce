@@ -1,9 +1,7 @@
-import { LoginService } from 'src/app/shop/services/login.service';
-import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit, NgModule, HostListener } from '@angular/core';
-import { ProductService } from '../services/product.service';
-import { Route } from '@angular/compiler/src/core';
-import { Router, ActivatedRoute, RouterModule } from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {ProductService} from '../services/product.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-single-product',
@@ -19,7 +17,6 @@ export class SingleProductComponent implements OnInit {
     private productService: ProductService, 
     private route: ActivatedRoute,
     private router: Router,
-    private loginService: LoginService, 
     private toastr: ToastrService,
   ) {
     // this.productService.getSingleProduct(Number(this.route.snapshot.params.id)).subscribe(res => {

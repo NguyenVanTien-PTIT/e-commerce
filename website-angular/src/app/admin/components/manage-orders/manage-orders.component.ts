@@ -38,27 +38,27 @@ export class ManageOrdersComponent implements OnInit {
     this.checkUser();
   }
 
-  checkUser(){
+  checkUser() {
     let currentUser = JSON.parse(localStorage.getItem('userCurrent'));
 
-    if(!currentUser){
+    if (!currentUser) {
       this.router.navigate(['/home']);
       return;
     }
     let checked = false;
-    currentUser.roles.forEach(role =>{
-      if(role === 'ADMIN'){
+    currentUser.roles.forEach(role => {
+      if (role === 'ADMIN') {
         checked = true;
       }
-    })
-    if(!checked){
+    });
+    if (!checked) {
       this.toast.error('Từ chối truy cập');
       this.router.navigate(['/home']);
       return;
     }
   }
 
-  loadData(){
+  loadData() {
     this.getOrderByStatus(this.statusCurrent);
   }
 
@@ -68,11 +68,15 @@ export class ManageOrdersComponent implements OnInit {
     }
     this.statusCurrent = status;
     this.manageOrderService.getOrderByStatus(status, this.page, this.pageSize).subscribe(data => {
+      if (null === data) {
+        this.toast.error('Từ chối truy cập!');
+        this.router.navigate(['/home']);
+      }
       this.orders = data;
-    })
+    });
     this.manageOrderService.countOrderByStatus(status).subscribe(data => {
       this.totalOrders = data;
-    })
+    });
   }
 
   handlePageChange(event){
@@ -139,7 +143,7 @@ export class ManageOrdersComponent implements OnInit {
     u.action = action;
     const dialogRef = this.dialog.open(OrderDeletePopupComponent, {data: u});
     dialogRef.afterClosed().subscribe(result => {
-      if(!result){
+      if (!result) {
         return;
       }
       if(result.event === 'delete'){

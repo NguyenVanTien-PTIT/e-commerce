@@ -13,8 +13,8 @@ export class AuthService implements  CanActivate {
     if (this.user) {
       return true;
     }
-   this.router.navigate(['home']);
-   return false; 
+    this.router.navigate(['home']);
+    return false;
   }
 
   getToken() {

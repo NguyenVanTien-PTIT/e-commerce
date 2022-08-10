@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
 
   //Màu từng cột
   colorScheme = {
-    domain: ['#704FC4', '#4B852C', '#B67A3D', '#5B6FC8', 
+    domain: ['rgba(90,31,220,0.9)', 'rgba(236,11,11,0.87)', '#f1dd58', 'rgba(73,238,39,0.7)',
     '#25706F','#704FC4', '#4B852C', '#B67A3D', '#5B6FC8', 
     '#25706F', "#4B852C"]
   };
@@ -98,11 +98,14 @@ export class DashboardComponent implements OnInit {
     this.getRevenue();
   }
   
-  getRevenue(){
+  getRevenue() {
     this.manageOrderService.getRevenue(this.year).subscribe(data => {
-      console.log(data);
+      if (null === data) {
+        this.toastr.error('Từ chối truy cập');
+        this.router.navigate(['/home']);
+      }
       this.revenues = data;
-    })
+    });
   }
 
   //Event biểu đồ tròn

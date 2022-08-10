@@ -39,8 +39,8 @@ export class OrderActionPopupComponent implements OnInit {
     this.loadData();
   }
 
-  loadData():void {
-    for(let controlName in this.orderForm.controls){
+  loadData(): void {
+    for (const controlName in this.orderForm.controls) {
       this.orderForm.controls[controlName].setValue(this.order[controlName]);
     }
   }

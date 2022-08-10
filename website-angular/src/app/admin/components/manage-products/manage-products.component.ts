@@ -264,6 +264,6 @@ export class ManageProductsComponent implements OnInit {
 
   //lay đường dẫn ảnh
   getPathImage(image:string) : string{
-    return 'http://localhost:8080/uploads/'+ image;
+    return 'http://localhost:8080/uploads/' + image;
   }
 }

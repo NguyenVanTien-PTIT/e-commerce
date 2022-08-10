@@ -1,10 +1,9 @@
-import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit } from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { LoginService } from '../services/login.service';
-import { ProductService } from '../services/product.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {Router} from '@angular/router';
+import {ProductService} from '../services/product.service';
 
 
 @Component({
@@ -35,7 +34,6 @@ export class HomeComponent implements OnInit {
     sanitizer: DomSanitizer,
     private router: Router, 
     private productService: ProductService,
-    private loginService: LoginService,
     private toastr: ToastrService) {
       this.loadData();
     // iconRegistry.addSvgIcon(

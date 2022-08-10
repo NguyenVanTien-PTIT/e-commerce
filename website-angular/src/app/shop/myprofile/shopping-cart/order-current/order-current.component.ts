@@ -1,9 +1,8 @@
-import { LoginService } from 'src/app/shop/services/login.service';
-import { FormControl, FormGroup } from '@angular/forms';
-import { OderService } from '../../../services/oder.service';
-import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import {FormControl, FormGroup} from '@angular/forms';
+import {OderService} from '../../../services/oder.service';
+import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-current',
@@ -27,7 +26,6 @@ export class OrderCurrentComponent implements OnInit {
   });
 
   constructor( 
-    public loginService: LoginService,
     private orderService: OderService,
     private router: Router,
     private toastr: ToastrService) 

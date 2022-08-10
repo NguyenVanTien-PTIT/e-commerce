@@ -15,7 +15,7 @@ import { User } from '../interfaces/Ilogin';
 })
 export class LoginComponent implements OnInit {
   private checkSignUp: boolean;
-  loginForm:FormGroup;
+  loginForm: FormGroup;
   user = {} as User;
   public signUpForm = new FormGroup({
     username: new FormControl(''),
@@ -27,45 +27,46 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, 
-    private loginService: LoginService, 
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private loginService: LoginService,
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
-    
+
   ) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
       username: [''],
       password: ['']
-    })
+    });
   }
 
-  //Lấy giá trị username và password gửi lên server
+  // Lấy giá trị username và password gửi lên server
   public createData() {
     const newUser: any = {};
-    for(let controlName in this.loginForm.controls){
-      if(controlName){
+    for (const controlName in this.loginForm.controls) {
+      if (controlName) {
         newUser[controlName] = this.loginForm.controls[controlName].value;
       }
     }
     return newUser;
   }
 
-  //Đăng nhập
-  login(){
-    this.loginService.checkLogin(this.createData()).subscribe((data) =>{
+  // Đăng nhập
+  login() {
+    this.loginService.checkLogin(this.createData()).subscribe((data) => {
       this.user = data.userDTO;
-      if(this.user != null){
-        let currentUser = JSON.stringify(data.userDTO); 
-        //Lưu user hiện tại và token vào localStorage
+      if (this.user != null) {
+        const currentUser = JSON.stringify(data.userDTO);
+
+        // Lưu user hiện tại và token vào localStorage
         localStorage.setItem('token', data.token);
         localStorage.setItem('userCurrent', currentUser);
         this.user.username = this.loginForm.value.username;
         this.loginService.ckeckHaslogin$.next(true);
-        for(let i of data.userDTO.roles){
-          if(i === "ADMIN"){
+        for (const i of data.userDTO.roles) {
+          if (i === 'ADMIN') {
             this.toastr.success(data.msg);
             this.onNoClick();
             // window.location.reload();
@@ -75,46 +76,49 @@ export class LoginComponent implements OnInit {
         }
         this.onNoClick();
         this.toastr.success(data.msg);
-      }else{
+      } else {
         this.toastr.error('Sai tài khoản hoặc mật khẩu');
       }
-    })
+    });
   }
 
-  //Lấy giá trị user đăng ký
+  // Lấy giá trị user đăng ký
   public getNewUser() {
     const newUser: any = {};
-    for(let controlName in this.signUpForm.controls){
-      if(controlName){
+    for (const controlName in this.signUpForm.controls) {
+      if (controlName) {
         newUser[controlName] = this.signUpForm.controls[controlName].value;
       }
     }
     return newUser;
   }
 
-  //Đăng ký
-  signUp(){
-    this.loginService.addUser(this.getNewUser()).subscribe(data =>{
+  // Đăng ký
+  signUp() {
+    this.loginService.addUser(this.getNewUser()).subscribe(data => {
       console.log('Nhận dữ liệu đăng ký user: ');
       console.log(data);
-      this.signUpForm.reset();
-      this.toastr.success('Đăng ký thành công!');
-
-    })
-    this.checkSignUp = false;
+      if (data == null) {
+        this.toastr.error('Username đã tồn tại!');
+      } else {
+        this.signUpForm.reset();
+        this.toastr.success('Đăng ký thành công!');
+        this.checkSignUp = false;
+      }
+    });
   }
-  
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  //Chuyển sang đăng ký
-  goToSignUp(){
+  // Chuyển sang đăng ký
+  goToSignUp() {
     this.checkSignUp = true;
   }
 
-  //Chuyển về đăng nhập
-  goToLogin(){
+  // Chuyển về đăng nhập
+  goToLogin() {
     this.checkSignUp = false;
   }
 }

@@ -33,7 +33,7 @@
             <img class="productImg" [src]=getPathImage(item.productDTO.image) alt="Photo of a Shiba Inu">
         </div>
         <div class="name" (click)="goToProductDetails(item.productDTO.id)">
-            <h5>{{item.productDTO.name}}</h5>
+            <h5 style="font-size: 18px; margin-top: 10px" >{{item.productDTO.name}}</h5>
             <p class="description" [innerHTML]= "item.productDTO.description"></p>
         </div>
         <div class="price">
@@ -104,7 +104,7 @@
                 </tr>
             </table>
             <div class="checkout-button">
-                <button mat-stroked-button color="primary" class="button full-button" [disabled]= true >
+                <button mat-stroked-button color="primary" class="button full-button" [disabled]= true style="height: 40px;">
                     THANH TOÁN
                 </button>
             </div>

@@ -1,9 +1,8 @@
-import { LoginService } from 'src/app/shop/services/login.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-import { User } from 'src/app/shop/interfaces/Ilogin';
-import { MatDialog } from '@angular/material';
-import { LoginComponent } from 'src/app/shop/login/login.component';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Router} from '@angular/router';
+import {User} from 'src/app/shop/interfaces/Ilogin';
+import {MatDialog} from '@angular/material';
+import {LoginComponent} from 'src/app/shop/login/login.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -65,8 +64,7 @@ export class SidenavComponent implements OnInit {
   }
   constructor(
     public dialog: MatDialog, 
-    private router: Router, 
-    public loginService: LoginService) {
+    private router: Router) {
 
   }
 

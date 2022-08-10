@@ -73,7 +73,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  //Đăng xuất
+  // Đăng xuất
   logout() {
     this.toastr.info('Đã đăng xuất')
     localStorage.removeItem('token');
@@ -81,17 +81,16 @@ export class HeaderComponent implements OnInit {
     this.isAdmin = false;
     this.userCurrent = null;
     this.loginService.ckeckHaslogin$.next(false);
-    this.router.navigate(['home']);
-    // window.location.reload();
+    void this.router.navigate(['home']);
   }
 
-  //Chuyển sang trang order
-  openOrder(){
-    this.router.navigate(['/shopping-cart/'+this.userCurrent.id]);
+  // Chuyển sang trang order
+  openOrder() {
+    this.router.navigate(['/shopping-cart/' + this.userCurrent.id]);
   }
-  
-  //Chuyển hướng sang profile
-  openProfile(){
-    this.router.navigate(['/myprofile']);
+
+  // Chuyển hướng sang profile
+  openProfile() {
+    void this.router.navigate(['/myprofile']);
   }
 }

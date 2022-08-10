@@ -1,9 +1,4 @@
-import { LoginService } from 'src/app/shop/services/login.service';
-import { FormControl, FormGroup } from '@angular/forms';
-import { OderService } from '../../services/oder.service';
-import { Router } from '@angular/router';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-shopping-cart',
